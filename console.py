@@ -123,12 +123,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return
             else:
-                key = args[0] + \
-                    '.' + args[1]
-                # if args[2] == 'updated_at':
-                # value = date("2020, 6, 26, 7, 52, 6, 96097").fromisoformat()
-                # if args[2] == 'created_at':
-                # value = date("2020, 6, 26, 7, 52, 6, 96097").fromisoformat()
+                key = args[0] + \ '.' + args[1]
                 try:
                     if '.' in args[3]:
                         value = float(args[3])
