@@ -20,6 +20,12 @@ class BaseModel:
                     continue
                 elif (key == 'updated_at' or key == 'created_at'):
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                if 'id' not in kwargs.keys():
+                    self.id = str(uuid4())
+                if 'created_at' not in kwargs.keys():
+                    self.created_at = datetime.now()
+                if 'updated_at' not in kwargs.keys():
+                    self.updated_at = datetime.now()
                 setattr(self, key, value)
 
         else:
