@@ -91,14 +91,14 @@ class HBNBCommand(cmd.Cmd):
             my_list = [str(value) for key, value in storage.all().items()]
             if len(my_list) != 0:
                 print(my_list)
-            elif arg not in self.classes:
-                print("** class doesn't exist **")
-                return
-            else:
-                my_list = [str(value) for key,
-                           value in storage.all().items() if arg in key]
-                if len(my_list) != 0:
-                    print(my_list)
+        elif arg not in self.classes:
+            print("** class doesn't exist **")
+            return
+        else:
+            my_list = [str(value) for key,
+                       value in storage.all().items() if arg in key]
+            if len(my_list) != 0:
+                print(my_list)
 
     def do_update(self, line):
         args = line.split()
