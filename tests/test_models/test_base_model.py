@@ -1,13 +1,107 @@
 #!/usr/bin/python3
 '''
-Test: BaseModel
+Test: BaseModel And pep8
 '''
 
 import io
 import unittest
 import unittest.mock
+import pep8
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
 from datetime import datetime
+
+
+class Testpep8(unittest.TestCase):
+
+    def test_pep8_amenity(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/amenity.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_base_model(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/base_model.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_city(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/city.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_place(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/place.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_review(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/review.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_state(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/state.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_user(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/user.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_init(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/__init__.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_file_storage(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/engine/file_storage.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_console(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['console.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_test_console(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['test/test_console.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_test_base_model(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(
+            ['tests/test_models/test_base_model.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
 
 class test_base_model(unittest.TestCase):
@@ -78,6 +172,27 @@ class test_base_model(unittest.TestCase):
         self.assertTrue(obj.id != obj1.id)
         self.assertTrue(obj.id != obj2.id)
         self.assertTrue(obj1.id != obj2.id)
+
+    def test_attr_nan(self):
+        """NaN attribute."""
+        obj = BaseModel(float("nan"))
+        self.assertTrue(hasattr(obj, "id"))
+        self.assertTrue(hasattr(obj, "created_at"))
+        self.assertTrue(hasattr(obj, "updated_at"))
+
+    def test_attr_inf(self):
+        """Inf attribute."""
+        obj = BaseModel(float("inf"))
+        self.assertTrue(hasattr(obj, "id"))
+        self.assertTrue(hasattr(obj, "created_at"))
+        self.assertTrue(hasattr(obj, "updated_at"))
+
+    def test_attr_none(self):
+        """None attribute."""
+        obj = BaseModel(None)
+        self.assertTrue(hasattr(obj, "id"))
+        self.assertTrue(hasattr(obj, "created_at"))
+        self.assertTrue(hasattr(obj, "updated_at"))
 
     def test_str_method(self):
         ''' Test str method '''
