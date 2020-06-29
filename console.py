@@ -111,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             try:
-                key = args[0] + \ '.' + args[1]
+                key = args[0] + '.' + args[1]
                 storage.all()[key]
             except KeyError:
                 print('** no instance found **')
@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return
             else:
-                key = args[0] + \ '.' + args[1]
+                key = args[0] + '.' + args[1]
                 try:
                     if '.' in args[3]:
                         value = float(args[3])
