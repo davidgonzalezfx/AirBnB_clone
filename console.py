@@ -3,6 +3,7 @@
 Console for Airbnb project
 '''
 import cmd
+import sys
 from datetime import datetime, date
 from models import storage
 from models.base_model import BaseModel
@@ -20,6 +21,17 @@ class HBNBCommand(cmd.Cmd):
 
     classes = ["BaseModel", "User", "State", "City", "Amenity", "Place",
                "Review"]
+
+    def precmd(self, line):
+        ''' Non-interactive mode & process line before execute commands '''
+        if not sys.stdin.isatty():
+            print()
+        if '.' in line and '(' in line and ')' in line:
+            splited = line.split('.')
+            arg = splited[0]
+            cmd = splited[1].split('(')[0]
+            line = '{} {}'.format(cmd, arg)
+        return line
 
     def do_quit(self, arg):
         ''' quit command for cmd '''
