@@ -36,7 +36,7 @@ class BaseModel:
 
     def __str__(self):
         '''Print the BaseModel atrributes.'''
-        return('[' + type(self).__name__ + '] (' + self.id +
+        return('[' + type(self).__name__ + '] (' + str(self.id) +
                ') ' + str(self.__dict__))
 
     def save(self):
