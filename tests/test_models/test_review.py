@@ -56,7 +56,6 @@ class TestReview(unittest.TestCase):
         my_Review.name = "LA"
         self.assertEqual(my_Review.name, 'LA')
 
-
     def test_attribute(self):
         """Test attributes."""
         review1 = Review()
