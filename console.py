@@ -28,9 +28,10 @@ class HBNBCommand(cmd.Cmd):
             print()
         if '.' in line and '(' in line and ')' in line:
             splited = line.split('.')
-            arg = splited[0]
+            arg_class = splited[0]
             cmd = splited[1].split('(')[0]
-            line = '{} {}'.format(cmd, arg)
+            arg_args = splited[1].split('(')[1].split(')')[0]
+            line = '{} {} {}'.format(cmd, arg_class, arg_args)
         return line
 
     def do_quit(self, arg):
@@ -146,6 +147,15 @@ class HBNBCommand(cmd.Cmd):
                     value = str(value)
                     setattr(storage.all()[key], args[2].strip("\"':"), value)
                     storage.save()
+
+    def do_count(self, arg):
+        '''Count instances of class passed as arg'''
+        cnt = 0
+        for key, value in storage.all().items():
+            instance = key.split('.')[0]
+            if instance == arg:
+                cnt += 1
+        print(cnt)
 
 
 if __name__ == '__main__':
