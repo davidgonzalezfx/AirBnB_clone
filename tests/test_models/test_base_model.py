@@ -13,11 +13,13 @@ from models.place import Place
 from models.amenity import Amenity
 from models.state import State
 from models.review import Review
+from console import HBNBCommand
 import test
 from datetime import datetime
 
 
 class Testpep8(unittest.TestCase):
+    """Test pep8 with all files"""
 
     def test_pep8_amenity(self):
         """Test the pep8."""
@@ -121,7 +123,7 @@ class Testpep8(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-    def test_pep8_test_state(self):
+    def test_pep8_test_place(self):
         """Test the pep8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(
@@ -129,7 +131,7 @@ class Testpep8(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-    def test_pep8_test_state(self):
+    def test_pep8_test_review(self):
         """Test the pep8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(
@@ -137,11 +139,19 @@ class Testpep8(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-    def test_pep8_test_state(self):
+    def test_pep8_test_user(self):
         """Test the pep8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(
             ['tests/test_models/test_user.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
+
+    def test_pep8_test_console(self):
+        """Test the pep8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(
+            ['tests/test_console.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
