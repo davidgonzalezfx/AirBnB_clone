@@ -24,6 +24,56 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertEqual(f.getvalue().strip(),
                              "*** Unknown syntax: something")
 
+    def test_emptyline(self):
+        """Tests emptyline in the console."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("\n")
+        out = ""
+        self.assertEqual(out, f.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("                  \n")
+        out = ""
+        self.assertEqual(out, f.getvalue())
+
+    def test_EOF(self):
+        """Tests EOF with the console."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF")
+        out = f.getvalue()
+        self.assertTrue(len(out) == 1)
+        self.assertEqual("\n", out)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF fake")
+        msj = f.getvalue().strip()
+        self.assertFalse(len(msj) == 1)
+        self.assertEqual("", msj)
+
+    def test_quit(self):
+        """Tests quit with the console."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("quit")
+        out = f.getvalue()
+        self.assertTrue(len(out) == 0)
+        self.assertEqual("", out)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("quit fake")
+        msj = f.getvalue()
+        self.assertTrue(len(msj) == 0)
+        self.assertEqual("", msj)
+
+    def test_help(self):
+        """Tests for help cmd."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help")
+        s = """
+Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
+
+"""
+        self.assertEqual(s, f.getvalue())
+
     def test_Base_model(self):
         """Test Basemodel with the console."""
         with patch('sys.stdout', new=StringIO()) as f:
