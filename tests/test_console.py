@@ -10,6 +10,20 @@ import os.path
 class TestHBNBCommand(unittest.TestCase):
     """Test the console file."""
 
+    def tearDown(self):
+        ''' After tests, remove json file '''
+        try:
+            remove("file.json")
+        except Exception:
+            pass
+
+    def test_unkown_command(self):
+        """Test commands that do not exist."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("something")
+            self.assertEqual(f.getvalue().strip(),
+                             "*** Unknown syntax: something")
+
     def test_Base_model(self):
         """Test Basemodel with the console."""
         with patch('sys.stdout', new=StringIO()) as f:
