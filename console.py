@@ -24,14 +24,14 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         ''' Non-interactive mode & process line before execute commands '''
-        if not sys.stdin.isatty():
-            print()
         if '.' in line and '(' in line and ')' in line:
             splited = line.split('.')
             arg_class = splited[0]
             cmd = splited[1].split('(')[0]
-            arg_args = splited[1].split('(')[1].split(')')[0]
-            line = '{} {} {}'.format(cmd, arg_class, arg_args)
+            args_list = splited[1].split('(')[1].split(')')[0].split(', ')
+            line = cmd + ' ' + arg_class + ' ' + args_list[0]
+            if len(args_list) > 1:
+                line = line + ' ' + args_list[1] + ' ' + args_list[2]
         return line
 
     def do_quit(self, arg):
@@ -62,6 +62,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         ''' Prints the string representation of id instance '''
         args = line.split()
+        print(args)
         if not args:
             print('** class name missing **')
             return
@@ -114,6 +115,7 @@ class HBNBCommand(cmd.Cmd):
                 print(my_list)
 
     def do_update(self, line):
+        ''' Update an instance based on the class name and id '''
         args = line.split()
         if len(args) == 0:
             print("** class name missing **")
