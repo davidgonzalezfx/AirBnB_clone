@@ -218,37 +218,6 @@ EOF  all  count  create  destroy  help  quit  show  update
             self.assertTrue(type(f), str)
             self.assertEqual(len(id), 36)
 
-    def test_show(self):
-        """Test show command with the console."""
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("create BaseModel")
-            id = f.getvalue().strip()
-            self.assertTrue(type(f), str)
-            self.assertEqual(len(id), 36)
-
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("show")
-            self.assertEqual(f.getvalue().strip(),
-                             "** class name missing **")
-
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("show Brent")
-            self.assertEqual(f.getvalue().strip(),
-                             "** class doesn't exist **")
-
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("show BaseModel")
-            self.assertEqual(f.getvalue().strip(),
-                             "** instance id missing **")
-
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("show BaseModel " + str(id))
-            self.assertTrue(type(f), str)
-            self.assertTrue("[BaseModel]" in f.getvalue().strip())
-            self.assertTrue("created_at" in f.getvalue().strip())
-            self.assertTrue("updated_at" in f.getvalue().strip())
-            self.assertTrue("id" in f.getvalue().strip())
-
     def test_destroy(self):
         """Test destroy command with the console."""
         with patch('sys.stdout', new=StringIO()) as f:
