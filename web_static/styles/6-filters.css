@@ -41,6 +41,8 @@
   margin-top: 19px;
   display: none;
   list-style: none;
+  position: relative;
+  z-index: 1;
 }
 
 .container .filters div:hover ul.popover {
